@@ -30,6 +30,10 @@ export const addExpense = async ({name, date, price})=>{
 
 export const listMyExpense = async ()=>{
   let res = await Api.get('/expense')
-  console.log(res.data);
+  return res.data;
+}
+
+export const deleteExpense = async (id)=>{
+  let res = await Api.delete('/expense',{data:{id}})
   return res.data;
 }

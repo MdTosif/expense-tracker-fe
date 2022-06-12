@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { addExpense } from '../../Apis/Api';
+import { GlobalContext } from '../../App';
+import Tabs from '../Tabs';
 import './style.css'
 
 
@@ -8,15 +11,18 @@ function AddExpense(props) {
     const [name, setName] = useState(localStorage.getItem('recentName') || "");
     const [price, setPrice] = useState(localStorage.getItem('recentPrice') || 0);
     const [date, setDate] = useState(localStorage.getItem('recentDate') || Date.now());
+    const { state, dispatch } = useContext(GlobalContext)
+
+    const navigate = useNavigate();
     
     async function submitHandler(e) {
         e.preventDefault();
-        let data = await addExpense({name,price,date})
+        await addExpense({name,price,date})
         localStorage.setItem('recentName', name);
         localStorage.setItem('recentPrice', price);
         localStorage.setItem('recentDate', date);
-
-        console.log(data);
+        navigate('/list')
+        dispatch({type:"updated"})
     }
 
 
@@ -47,6 +53,7 @@ function AddExpense(props) {
             </div>
             <button type="submit" className="btn btn-ghost">Add</button>
         </form>
+        <Tabs />
     </div>
     );
 }

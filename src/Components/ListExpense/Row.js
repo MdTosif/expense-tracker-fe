@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { deleteExpense } from '../../Apis/Api';
+import { GlobalContext } from '../../App';
 
 function Row(props) {
     let data = props.data;
-    async function onDeleteHandler(e){
+    const { state, dispatch } = useContext(GlobalContext)
+
+    async function onDeleteHandler(e, id){
         e.preventDefault();
-        
+        console.log(id);
+        await deleteExpense(id)
+        dispatch({type:"updated"})
     }
     return (
             <tr>
@@ -18,7 +24,7 @@ function Row(props) {
                     {new Date(data.date).toLocaleString()}
                 </td>
                 <td data-th="Action">
-                    <button onClick={(e)=>{onDeleteHandler(e)}}>x</button>
+                    <button onClick={(e)=>{onDeleteHandler(e, data._id)}}>x</button>
                 </td>
             </tr>
     );

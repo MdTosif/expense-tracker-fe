@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {signupApi } from '../../Apis/Api';
 import './signup.css';
 
@@ -6,7 +7,7 @@ import './signup.css';
 function Signup(props) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
+    const navigate = useNavigate();
     useEffect(()=>{
         
     },[])
@@ -15,6 +16,7 @@ function Signup(props) {
         e.preventDefault();
         let {token} = await signupApi({username,password})
         localStorage.setItem('token', token);
+        navigate('/add')
     }
 
     return (
@@ -36,6 +38,7 @@ function Signup(props) {
                     <label htmlFor="password">Password</label>
                 </div>
                 <button type="submit" className="btn btn-ghost">Sign up</button>
+                <button  className="btn" onClick={()=>{navigate('/login')}}>Login</button>
             </form>
         </div>
     );

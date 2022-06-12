@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {  loginApi } from '../../Apis/Api';
 import './login.css';
 
@@ -6,11 +7,13 @@ import './login.css';
 function Login(props) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     async function submitHandler(e) {
         e.preventDefault();
         let {token} = await loginApi({username,password})
         localStorage.setItem('token', token);
+        navigate('/list')
     }
 
     return (
@@ -32,6 +35,7 @@ function Login(props) {
                     <label htmlFor="password">Password</label>
                 </div>
                 <button type="submit" className="btn btn-ghost">Login</button>
+                <button  className="btn" onClick={()=>{navigate('/signup')}}>Signup</button>
             </form>
         </div>
     );
