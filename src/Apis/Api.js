@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const Api = axios.create({
-  baseURL: `http://expense-t-be.herokuapp.com`,
+  baseURL: `https://expense-t-be.herokuapp.com`,
   headers:{
     Authorization: localStorage.getItem('token')
   }
