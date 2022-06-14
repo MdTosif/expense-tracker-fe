@@ -8,7 +8,7 @@ function Tabs(props) {
         <div className='tabs'>
             <button className='btn fourth' onClick={()=>{navigate('/add')}}>Add</button>
             <button className='btn fourth' onClick={()=>{navigate('/list')}}>Lists</button>
-            <button className='btn fourth' onClick={()=>{navigate('/chart')}}>Charts</button>
+            <button className='btn fourth' onClick={()=>{navigate('/charts')}}>Charts</button>
         </div>
     );
 }

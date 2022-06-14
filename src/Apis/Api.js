@@ -37,3 +37,13 @@ export const deleteExpense = async (id)=>{
   let res = await Api.delete('/expense',{data:{id}})
   return res.data;
 }
+
+export const dayChartData = async ()=>{
+  let res = await Api.get('/expense/day-chart')
+  return res.data;
+}
+
+export const barChartData = async ()=>{
+  let res = await Api.get('/expense/expense-by-name')
+  return res.data;
+}
